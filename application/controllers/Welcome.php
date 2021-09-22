@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends MX_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('url');
+	}
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,6 +26,13 @@ class Welcome extends MX_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$headers = array();
+		foreach ($_SERVER as $key => $value) {
+			if (substr($key, 0, 5) <> 'HTTP_') {
+				continue;
+			}
+			$header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
+			echo $header .' : '. $value .'<br>';
+		};
 	}
 }

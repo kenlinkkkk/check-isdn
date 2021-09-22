@@ -23,8 +23,11 @@ class Root extends MX_Controller
 		$segment1 = $this->uri->segment(1);
 
 		switch ($segment1) {
-			default:
+			case 'header':
 				$html = modules::run('Welcome');
+				break;
+			default:
+				$html = modules::run('CheckIsdnController');
 		}
 
 		$this->output->set_output($html);
