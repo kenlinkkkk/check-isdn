@@ -32,7 +32,9 @@ class Welcome extends MX_Controller {
 				continue;
 			}
 			$header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
-			echo $header .' : '. $value .'<br>';
-		};
+			$headers[$header] = $value;
+		}
+		header('Content-Type: application/json');
+		echo json_encode($headers, JSON_PRETTY_PRINT);
 	}
 }
