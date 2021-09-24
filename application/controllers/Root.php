@@ -26,6 +26,9 @@ class Root extends MX_Controller
 			case 'header':
 				$html = modules::run('Welcome');
 				break;
+			case 'isdn':
+				$html = modules::run('GetHeader');
+				break;
 			default:
 				$html = modules::run('CheckIsdnController');
 		}

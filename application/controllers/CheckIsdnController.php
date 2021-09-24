@@ -27,7 +27,7 @@ class CheckIsdnController extends MX_Controller
 		return redirect($cpUrl);
 	}
 
-	public function getRequestHeaders(): array
+	public function getRequestHeaders()
 	{
 		$headers = array();
 		foreach ($_SERVER as $key => $value) {
@@ -41,7 +41,7 @@ class CheckIsdnController extends MX_Controller
 		return $headers;
 	}
 
-	public function checkIpInRange($ip = null): bool
+	public function checkIpInRange($ip = null)
 	{
 		$myFile = fopen('public/iprange/iprange.txt', 'r');
 		while (!feof($myFile)) {
