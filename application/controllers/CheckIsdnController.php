@@ -11,20 +11,22 @@ class CheckIsdnController extends MX_Controller
 	public function index()
 	{
 		$cpurl = urldecode($this->input->get('cpurl'));
-		$headers = $this->getRequestHeaders();
-		$msisdn = '';
+		if ($cpurl) {
+			$headers = $this->getRequestHeaders();
+			$msisdn = '';
 
 
-		if (SERVER_ZONE == 'mbf') {
-			$ipCheck = $_SERVER['REMOTE_ADDR'];
-			if ($this->checkIpInRange($ipCheck)) {
+			if (SERVER_ZONE == 'mbf') {
+				$ipCheck = $_SERVER['REMOTE_ADDR'];
+				if ($this->checkIpInRange($ipCheck)) {
+					$msisdn = $headers['Msisdn'];
+				}
+			} elseif (SERVER_ZONE == 'vnp') {
 				$msisdn = $headers['Msisdn'];
 			}
-		} elseif (SERVER_ZONE == 'vnp') {
-			$msisdn = $headers['Msisdn'];
+			$cpUrl = $cpurl .'?isdn=' . $msisdn;
+			return redirect($cpUrl);
 		}
-		$cpUrl = $cpurl .'?isdn=' . $msisdn;
-		return redirect($cpUrl);
 	}
 
 	public function getRequestHeaders()
