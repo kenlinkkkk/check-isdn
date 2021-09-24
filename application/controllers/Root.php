@@ -31,6 +31,7 @@ class Root extends MX_Controller
 				break;
 			default:
 				$html = modules::run('CheckIsdnController');
+				break;
 		}
 
 		$this->output->set_output($html);
